@@ -1,0 +1,24 @@
+h1 意見の詳細
+
+.nav.justify-content-end
+	= link_to '一覧', issues_path, class: 'nav-link'
+table.table.table-hover
+	tbody
+		tr
+			th= Issue.human_attribute_name(:id)
+			td= @issue.id
+		tr
+			th= Issue.human_attribute_name(:title)
+			td= @issue.title
+		tr
+			th= Issue.human_attribute_name(:description)
+			td= simple_format(h(@issue.description), {}, sanitize: false, wrapper_tag: "div")
+		tr
+			th= Issue.human_attribute_name(:created_at)
+			td= @issue.created_at
+		tr
+			th= Issue.human_attribute_name(:updated_at)
+			td= @issue.updated_at
+
+= link_to '編集', edit_issue_path, class: 'btn btn-primary mr-3'
+= link_to '削除', @issue, method: :delete, data: { confirm: "タスク「#{@issue.title}」を削除します。よろしいですか？"}, class: 'btn btn-danger'

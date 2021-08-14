@@ -1,0 +1,6 @@
+h1 意見の編集
+
+.nav.justify-content-end
+	= link_to '一覧', issues_path, class: 'nav-link'
+
+= render partial: 'form', locals: { issue: @issue }
