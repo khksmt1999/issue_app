@@ -1,0 +1,14 @@
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Issue.human_attribute_name(:title)
+      th= User.human_attribute_name(:username)
+      th= Issue.human_attribute_name(:created_at)
+  tbody
+    - issues.each do |issue|  
+      - user = User.find(issue.user_id)  
+      tr
+        td= link_to issue.title, issue
+        td= link_to user.username, mypage_path(user)
+        td= issue.created_at

@@ -1,0 +1,17 @@
+.nav.justify-content-end
+	= link_to 'ユーザー一覧', users_path, class: 'nav-link'
+table.table.table-hover
+	tbody
+		tr
+			th= Issue.human_attribute_name(:username)
+			td= @user.username
+		tr
+			th= Issue.human_attribute_name(:remember_created_at)
+			td= @user.created_at
+
+- if @user == current_user
+	= link_to "編集する", edit_user_path(@user), class: "nav_link"
+	= link_to "削除する", delete_user_path(@user), class: "nav_link", method: :delete
+
+h1 #{@user.username}の投稿意見一覧
+= render partial: "issues/issue_index", locals: { issues: @issues }

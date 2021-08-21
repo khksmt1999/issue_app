@@ -1,0 +1,13 @@
+h1 ユーザー一覧
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Issue.human_attribute_name(:username)
+      th= Issue.human_attribute_name(:created_at)
+  tbody
+    - @users.each do |user|    
+      tr
+        td= link_to user.username, "users/#{user.id}"
+        td= user.created_at

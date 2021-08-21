@@ -11,7 +11,15 @@ html
   body
     .app-title.navbar.navbar-expand-md.navbar-light.bg-light
       .navbar-brand IssueApp
+      = link_to "意見一覧", issues_path, class: "nav_link"
+      = link_to "ユーザー一覧", users_path, class: "nav_link"
+      - if current_user
+        = link_to "マイページ", mypage_path(current_user), class: "nav_link"
+        = link_to "ログアウト", logout_path, class: "nav_link"
+      - else
+        = link_to "ログイン", login_path, class: "nav_link"
+        = link_to "新規登録", signup_path, class: "nav_link"
     .container
-      - if flash.notice.present?
-        .alert.alert-success= flash.notice
+      - flash.each do |message_type, message|
+        = content_tag :div, message, class: message_type
     = yield

@@ -1,10 +1,14 @@
 class IssuesController < ApplicationController
+	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
   def index
 		@issues = Issue.all
   end
 
   def show
 		@issue = Issue.find(params[:id])
+		user_id = @issue.user_id
+		@user = User.find(user_id)
   end
 
   def new
@@ -12,9 +16,13 @@ class IssuesController < ApplicationController
   end
 
   def create
-    issue = Issue.new(issue_params)
-    issue.save!
-    redirect_to issues_url, notice: "意見「#{issue.title}」を登録しました。"
+    @issue = current_user.issues.new(issue_params)
+
+    if @issue.save
+    	redirect_to @issue, notice: "意見「#{@issue.title}」を登録しました。"
+		else
+			render :new
+		end
   end
 
   def edit

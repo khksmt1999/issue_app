@@ -1,17 +1,4 @@
 h1 ご意見一覧
 = link_to '新規投稿', new_issue_path, class: 'btn btn-primary'
 
-.mb-3
-table.table.table-hover
-  thead.thead-default
-    tr
-      th= Issue.human_attribute_name(:title)
-      th= Issue.human_attribute_name(:created_at)
-  tbody
-    - @issues.each do |issue|    
-      tr
-        td= link_to issue.title, issue
-        td= issue.created_at
-        td
-          = link_to '編集', edit_issue_path(issue), class: 'btn btn-primary mr-3'
-          = link_to '削除', issue, method: :delete, data: { confirm: "タスク「#{issue.title}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
+= render partial: "issue_index", locals: { issues: @issues }
